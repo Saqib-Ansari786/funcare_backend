@@ -1,21 +1,50 @@
 import express from "express";
 import multer from "multer";
 const storage = multer.diskStorage({
-  destination: function(req, file, cb) {
-    cb(null, 'public/uploads/')
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads/");
   },
-  filename: function(req, file, cb) {
+  filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + "-" + uniqueSuffix + ".jpg")
-  }
+    cb(null, file.fieldname + "-" + uniqueSuffix + ".jpg");
+  },
 });
 const upload = multer({ storage: storage });
-import {AppUserSet, AppUserData, AppUserUpdate} from "../Controllers/AppUSerController.js";
-import {AppBooking, AppBookingData} from "../Controllers/BookingUserController.js";
-import {CreatePlaylandUser, PlaylandAllData, PlaylandUserUpdate, PlaylandUserDelete} from "../Controllers/PlaylandUserController.js";
-import { BusinessUserSet, BusinessUserGet } from "../Controllers/BusinessUserController.js";
-import {  BusinessPlaylandData } from "../Controllers/BusinessPlaylandUserController.js";
-import { BusinessBookingUserCreate, BookingUserData, BusinessPlaylandBooked, PaymentCreate,BusinessPlaylandUpdate } from "../Controllers/BusinessBookingUserController.js";
+import {
+  AppUserSet,
+  AppUserData,
+  AppUserUpdate,
+} from "../Controllers/AppUSerController.js";
+import {
+  AppBooking,
+  AppBookingData,
+} from "../Controllers/BookingUserController.js";
+import {
+  CreatePlaylandUser,
+  PlaylandAllData,
+  PlaylandUserUpdate,
+  PlaylandUserDelete,
+} from "../Controllers/PlaylandUserController.js";
+import {
+  BusinessUserSet,
+  BusinessUserGet,
+} from "../Controllers/BusinessUserController.js";
+import { BusinessPlaylandData } from "../Controllers/BusinessPlaylandUserController.js";
+import {
+  BusinessBookingUserCreate,
+  BookingUserData,
+  BusinessPlaylandBooked,
+  PaymentCreate,
+  BusinessPlaylandUpdate,
+} from "../Controllers/BusinessBookingUserController.js";
+import {
+  sendOTP as CleintsendOTP,
+  verifyOTP as CleintverifyOTP,
+} from "../Controllers/ClientUser.js";
+import {
+  sendOTP as BusinesssendOTP,
+  verifyOTP as BusinessverifyOTP,
+} from "../Controllers/BusinessUser.js";
 
 const userRouter = express.Router();
 
@@ -24,7 +53,6 @@ userRouter.route("/appuser").post(AppUserSet);
 userRouter.route("/user/record/:id").get(AppUserData);
 
 userRouter.route("/user/update/:id").post(AppUserUpdate);
-
 
 userRouter.route("/appbooking").post(AppBooking);
 
@@ -40,13 +68,11 @@ userRouter.route("/playlanduser/update/:id").post(PlaylandUserUpdate);
 
 userRouter.route("/playlanduser/delete/:id").post(PlaylandUserDelete);
 
-
 // business user end point
 
 userRouter.route("/businessuser").post(BusinessUserSet);
 
 userRouter.route("/businessuser/record/:id").get(BusinessUserGet);
-
 
 // userRouter.route("/businessplaylanduser").post(upload.single("image"),BusinessPlaylandUserCreate);
 
@@ -61,5 +87,11 @@ userRouter.route("/businessbookinguser").post(BusinessBookingUserCreate);
 userRouter.route("/payment").post(PaymentCreate);
 
 userRouter.route("/userbooking/:id").get(BookingUserData);
+
+userRouter.route("/client/sendOTP").post(CleintsendOTP);
+userRouter.route("/client/verifyOTP").post(CleintverifyOTP);
+
+userRouter.route("/client/sendOTP").post(BusinesssendOTP);
+userRouter.route("/client/verifyOTP").post(BusinessverifyOTP);
 
 export default userRouter;
