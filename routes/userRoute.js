@@ -91,7 +91,7 @@ userRouter.route("/userbooking/:id").get(BookingUserData);
 userRouter.route("/client/sendOTP").post(CleintsendOTP);
 userRouter.route("/client/verifyOTP").post(CleintverifyOTP);
 
-userRouter.route("/client/sendOTP").post(BusinesssendOTP);
-userRouter.route("/client/verifyOTP").post(BusinessverifyOTP);
+userRouter.route("/business/sendOTP").post(BusinesssendOTP);
+userRouter.route("/business/verifyOTP").post(BusinessverifyOTP);
 
 export default userRouter;
