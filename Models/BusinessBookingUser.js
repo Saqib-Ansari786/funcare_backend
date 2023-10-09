@@ -31,6 +31,13 @@ const userSchema = new mongoose.Schema({
   seats: {
     type: Number,
   },
+  packages_selected: [
+    {
+      package_id: {
+        type: String,
+      },
+    },
+  ],
 });
 
 const BusinessBookingUser = mongoose.model("businessbookinguser", userSchema);

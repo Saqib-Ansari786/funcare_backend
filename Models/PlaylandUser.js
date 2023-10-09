@@ -16,7 +16,12 @@ const userSchema = new mongoose.Schema(
       type: String,
     },
     image: {
-      type: String,
+      filename: {
+        type: String,
+      },
+      path: {
+        type: String,
+      },
     },
     location: {
       type: String,

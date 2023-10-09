@@ -1,15 +1,5 @@
 import express from "express";
-import multer from "multer";
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/uploads/");
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, file.fieldname + "-" + uniqueSuffix + ".jpg");
-  },
-});
-const upload = multer({ storage: storage });
+
 import {
   AppUserSet,
   AppUserData,
@@ -34,6 +24,7 @@ import {
   BusinessPlaylandUpdate,
   UpdateBookingSeats,
 } from "../Controllers/BusinessBookingUserController.js";
+import upload from "../middleware/uploadImage.js";
 
 const userRouter = express.Router();
 
@@ -45,7 +36,9 @@ userRouter.route("/user/update/:id").post(AppUserUpdate);
 
 // userRouter.route("/playlanduser").post(upload.single("image"),PlaylandUserCreate);
 
-userRouter.route("/create/playlanduser").post(CreatePlaylandUser);
+userRouter
+  .route("/create/playlanduser")
+  .post(upload.single("image"), CreatePlaylandUser);
 
 userRouter.route("/playlandrecord").get(PlaylandAllData);
 

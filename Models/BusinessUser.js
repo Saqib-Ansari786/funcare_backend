@@ -13,7 +13,12 @@ const userSchema = new mongoose.Schema(
     },
 
     image: {
-      type: String,
+      filename: {
+        type: String,
+      },
+      path: {
+        type: String,
+      },
     },
     otp: Number,
     otp_expiry: Date,
