@@ -1,6 +1,5 @@
 import ErrorHandler from "../utils/ErrorHandler.js";
 import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
-import BusinessPlaylandUser from "../Models/BusinessPlaylandUser.js";
 import PlaylandUser from "../Models/PlaylandUser.js";
 
 // export const BusinessPlaylandUserCreate = catchAsyncErrors(async (req, res, next) => {
@@ -32,32 +31,21 @@ import PlaylandUser from "../Models/PlaylandUser.js";
 //     console.error(err);
 //   }
 
-
 // });
-
-
 
 ////////////////////////////  get All user playland record ////////////////////////
 export const BusinessPlaylandData = catchAsyncErrors(async (req, res, next) => {
-
   try {
-    
     const id = req.params.id;
     // console.log(id);
-    const userPlayland = await PlaylandUser.find({user_firebase_id : id});
+    const userPlayland = await PlaylandUser.find({ user_firebase_id: id });
 
     if (!userPlayland) {
       return next(new ErrorHandler("Playland not found", 404));
     }
-  
+
     res.status(201).json({ message: "success", userPlayland });
-    
   } catch (err) {
     console.error(err);
   }
-
-
 });
-
-
-

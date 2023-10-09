@@ -37,14 +37,6 @@ import {
   PaymentCreate,
   BusinessPlaylandUpdate,
 } from "../Controllers/BusinessBookingUserController.js";
-import {
-  sendOTP as CleintsendOTP,
-  verifyOTP as CleintverifyOTP,
-} from "../Controllers/ClientUser.js";
-import {
-  sendOTP as BusinesssendOTP,
-  verifyOTP as BusinessverifyOTP,
-} from "../Controllers/BusinessUser.js";
 
 const userRouter = express.Router();
 
@@ -88,10 +80,10 @@ userRouter.route("/payment").post(PaymentCreate);
 
 userRouter.route("/userbooking/:id").get(BookingUserData);
 
-userRouter.route("/client/sendOTP").post(CleintsendOTP);
-userRouter.route("/client/verifyOTP").post(CleintverifyOTP);
+// userRouter.route("/client/sendOTP").post(CleintsendOTP);
+// userRouter.route("/client/verifyOTP").post(CleintverifyOTP);
 
-userRouter.route("/business/sendOTP").post(BusinesssendOTP);
-userRouter.route("/business/verifyOTP").post(BusinessverifyOTP);
+// userRouter.route("/business/sendOTP").post(BusinesssendOTP);
+// userRouter.route("/business/verifyOTP").post(BusinessverifyOTP);
 
 export default userRouter;
