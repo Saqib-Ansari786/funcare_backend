@@ -32,6 +32,7 @@ import {
   BusinessPlaylandBooked,
   PaymentCreate,
   BusinessPlaylandUpdate,
+  UpdateBookingSeats,
 } from "../Controllers/BusinessBookingUserController.js";
 
 const userRouter = express.Router();
@@ -71,6 +72,7 @@ userRouter.route("/businessbookinguser").post(BusinessBookingUserCreate);
 userRouter.route("/payment").post(PaymentCreate);
 
 userRouter.route("/userbooking/:id").get(BookingUserData);
+userRouter.route("/update/seats/:id").post(UpdateBookingSeats);
 
 // userRouter.route("/client/sendOTP").post(CleintsendOTP);
 // userRouter.route("/client/verifyOTP").post(CleintverifyOTP);
