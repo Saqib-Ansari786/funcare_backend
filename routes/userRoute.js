@@ -16,10 +16,6 @@ import {
   AppUserUpdate,
 } from "../Controllers/AppUSerController.js";
 import {
-  AppBooking,
-  AppBookingData,
-} from "../Controllers/BookingUserController.js";
-import {
   CreatePlaylandUser,
   PlaylandAllData,
   PlaylandUserUpdate,
@@ -45,10 +41,6 @@ userRouter.route("/appuser").post(AppUserSet);
 userRouter.route("/user/record/:id").get(AppUserData);
 
 userRouter.route("/user/update/:id").post(AppUserUpdate);
-
-userRouter.route("/appbooking").post(AppBooking);
-
-userRouter.route("/appbookingdata/:id").get(AppBookingData);
 
 // userRouter.route("/playlanduser").post(upload.single("image"),PlaylandUserCreate);
 

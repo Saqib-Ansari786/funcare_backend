@@ -30,49 +30,25 @@ import PlaylandUser from "../Models/PlaylandUser.js";
 //     console.error(err);
 //   }
 
-
 // });
 
-
 export const CreatePlaylandUser = catchAsyncErrors(async (req, res, next) => {
-
   try {
-    const record = new PlaylandUser({
-
-      user_firebase_id: req.body.user_firebase_id,
-      playland_name: req.body.playland_name,
-      discription: req.body.discription,
-      latitude: req.body.latitude,
-      longitude: req.body.longitude,
-      location: req.body.location,
-      time_open: req.body.time_open,
-      time_close: req.body.time_close,
-      price: req.body.price,
-      discount: req.body.discount,
-      path_url:req.body.path_url,
-
-    });
+    const record = new PlaylandUser(req.body);
     await record.save();
     // res.send('Record saved successfully.');
     res.status(201).json({
       message: "success",
-      record
+      record,
     });
-
   } catch (err) {
     console.error(err);
   }
-
-
 });
-
-
 
 ////////////////////////////  get All playland Record ////////////////////////
 export const PlaylandAllData = catchAsyncErrors(async (req, res, next) => {
-
   try {
-
     PlaylandUser.find({}, (err, data) => {
       if (err) {
         res.send(err);
@@ -80,15 +56,10 @@ export const PlaylandAllData = catchAsyncErrors(async (req, res, next) => {
         res.json(data);
       }
     });
-    
   } catch (err) {
     console.error(err);
   }
-
-
 });
-
-
 
 ///////////// update playland user data ////////////////////
 
@@ -105,8 +76,6 @@ export const PlaylandUserUpdate = async (req, res, next) => {
 
   res.status(201).json({ message: "success", UpdateplaylandUser });
 };
-
-
 
 ///////////// delete playland user ////////////////////
 
