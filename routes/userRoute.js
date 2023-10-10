@@ -25,6 +25,7 @@ import {
   UpdateBookingSeats,
 } from "../Controllers/BusinessBookingUserController.js";
 import upload from "../middleware/uploadImage.js";
+import { imageUpload } from "../Controllers/ImageController.js";
 
 const userRouter = express.Router();
 
@@ -35,6 +36,8 @@ userRouter.route("/user/record/:id").get(AppUserData);
 userRouter.route("/user/update/:id").post(AppUserUpdate);
 
 // userRouter.route("/playlanduser").post(upload.single("image"),PlaylandUserCreate);
+
+userRouter.route("/upload/image").post(upload.single("image"), imageUpload);
 
 userRouter
   .route("/create/playlanduser")
