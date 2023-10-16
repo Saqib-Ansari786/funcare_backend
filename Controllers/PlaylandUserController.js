@@ -57,3 +57,12 @@ export const PlaylandUserDelete = async (req, res, next) => {
   await playlandrecord.remove();
   res.status(201).json({ message: "success", playlandrecord });
 };
+
+export const DeleteAllPlayland = catchAsyncErrors(async (req, res, next) => {
+  try {
+    await PlaylandUser.deleteMany({});
+    res.status(201).json({ message: "success" });
+  } catch (err) {
+    console.error(err);
+  }
+});
