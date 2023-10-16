@@ -122,3 +122,22 @@ export const PaymentCreate = catchAsyncErrors(async (req, res, next) => {
     res.status(400).json({ message: "Error", err });
   }
 });
+
+export const GetAllConfirmedBooking = catchAsyncErrors(
+  async (req, res, next) => {
+    try {
+      const booking = await BusinessBookingUser.find({
+        paymentstatus: "confirmed",
+        timing_selected: req.params.timing_selected,
+      });
+
+      if (!booking) {
+        return next(new ErrorHandler("Booking not found", 404));
+      }
+
+      res.status(201).json({ message: "success", booking });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+);

@@ -23,6 +23,7 @@ import {
   PaymentCreate,
   BusinessPlaylandUpdate,
   UpdateBookingSeats,
+  GetAllConfirmedBooking,
 } from "../Controllers/BusinessBookingUserController.js";
 import upload from "../middleware/uploadImage.js";
 import { imageUpload } from "../Controllers/ImageController.js";
@@ -67,6 +68,7 @@ userRouter.route("/payment").post(PaymentCreate);
 
 userRouter.route("/userbooking/:id").get(BookingUserData);
 userRouter.route("/update/seats/:id").post(UpdateBookingSeats);
+userRouter.route("get/booking/:timing_selected").get(GetAllConfirmedBooking);
 
 // userRouter.route("/client/sendOTP").post(CleintsendOTP);
 // userRouter.route("/client/verifyOTP").post(CleintverifyOTP);

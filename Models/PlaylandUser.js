@@ -9,17 +9,35 @@ const userSchema = new mongoose.Schema(
     discription: {
       type: String,
     },
-    time_open: {
-      type: String,
-    },
-    time_close: {
-      type: String,
-    },
     image: {
       type: String,
     },
     location: {
       type: String,
+    },
+    timing1: {
+      timing: {
+        type: String,
+      },
+      total_seats: {
+        type: Number,
+      },
+    },
+    timing2: {
+      timing: {
+        type: String,
+      },
+      total_seats: {
+        type: Number,
+      },
+    },
+    timing3: {
+      timing: {
+        type: String,
+      },
+      total_seats: {
+        type: Number,
+      },
     },
     packages: [
       {
