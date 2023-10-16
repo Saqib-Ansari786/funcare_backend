@@ -17,3 +17,16 @@ export const imageUpload = catchAsyncErrors(async (req, res, next) => {
     console.error(err);
   }
 });
+
+
+export const getImage = catchAsyncErrors(async (req, res, next) => {
+  try {
+    const image = await ImageUpload.find();
+    res.status(200).json({
+      message: "success",
+      image,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+});

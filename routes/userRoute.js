@@ -39,9 +39,7 @@ userRouter.route("/user/update/:id").post(AppUserUpdate);
 
 userRouter.route("/upload/image").post(upload.single("image"), imageUpload);
 
-userRouter
-  .route("/create/playlanduser")
-  .post(upload.single("image"), CreatePlaylandUser);
+userRouter.route("/create/playlanduser").post(CreatePlaylandUser);
 
 userRouter.route("/playlandrecord").get(PlaylandAllData);
 

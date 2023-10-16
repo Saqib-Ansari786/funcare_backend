@@ -4,13 +4,7 @@ import PlaylandUser from "../Models/PlaylandUser.js";
 
 export const CreatePlaylandUser = catchAsyncErrors(async (req, res, next) => {
   try {
-    const { originalname, path } = req.file;
     const record = new PlaylandUser(req.body);
-
-    record.image = {
-      filename: originalname,
-      path,
-    };
     await record.save();
     // res.send('Record saved successfully.');
     res.status(201).json({
