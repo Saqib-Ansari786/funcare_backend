@@ -3,7 +3,6 @@ import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import BusinessBookingUser from "../Models/BusinessBookingUser.js";
 import dotenv from "dotenv";
 dotenv.config();
-import stripePackage from "stripe";
 import stripe from "stripe";
 const secretKey =
   "sk_test_51NEDnZD7q9cT09mVx6pZKtUePb04E0SpzlLSCNpD7qyTBW7wfH3uP1hbFsNIAFuyePxzPfhkbWQi6hyVazcFXUi40024laLDyQ";
@@ -129,6 +128,7 @@ export const GetAllConfirmedBooking = catchAsyncErrors(
       const booking = await BusinessBookingUser.find({
         paymentstatus: "confirmed",
         timing_selected: req.params.timing_selected,
+        date_selected: req.params.date_selected,
       });
 
       if (!booking) {

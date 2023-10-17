@@ -29,13 +29,12 @@ const userSchema = new mongoose.Schema(
     timing_selected: {
       type: String,
     },
-    packages_selected: [
-      {
-        package_id: {
-          type: String,
-        },
-      },
-    ],
+    packages_selected: {
+      type: String,
+    },
+    date_selected: {
+      type: String,
+    },
   },
   {
     timestamps: true,
