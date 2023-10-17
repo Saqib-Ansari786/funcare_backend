@@ -16,7 +16,6 @@ import {
   BusinessUserSet,
   BusinessUserGet,
 } from "../Controllers/BusinessUserController.js";
-import { BusinessPlaylandData } from "../Controllers/BusinessPlaylandUserController.js";
 import {
   BusinessBookingUserCreate,
   BookingUserData,
@@ -57,8 +56,6 @@ userRouter.route("/businessuser").post(BusinessUserSet);
 userRouter.route("/businessuser/record/:id").get(BusinessUserGet);
 
 // userRouter.route("/businessplaylanduser").post(upload.single("image"),BusinessPlaylandUserCreate);
-
-userRouter.route("/user/playland/:id").get(BusinessPlaylandData);
 
 userRouter.route("/playland/update/:id").post(BusinessPlaylandUpdate);
 
