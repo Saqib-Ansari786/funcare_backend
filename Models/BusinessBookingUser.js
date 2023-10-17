@@ -11,10 +11,16 @@ const userSchema = new mongoose.Schema(
       // type: String,
       // required: [true, "please enter firebase id"],
     },
+    playland_name: {
+      type: String,
+    },
     bookingstatus: {
       type: String,
     },
-    amount: {
+    price: {
+      type: Number,
+    },
+    discount: {
       type: Number,
     },
     method: {
