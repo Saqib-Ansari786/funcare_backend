@@ -141,3 +141,18 @@ export const GetAllConfirmedBooking = catchAsyncErrors(
     }
   }
 );
+
+export const deleteAllBooking = catchAsyncErrors(async (req, res, next) => {
+  try {
+    await BusinessBookingUser.deleteMany();
+
+    res.status(201).json({
+      success: true,
+      message: "All Booking deleted",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "error" + error,
+    });
+  }
+});
