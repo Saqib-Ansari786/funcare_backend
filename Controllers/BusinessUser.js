@@ -1,47 +1,51 @@
-// import ErrorHandler from "../utils/ErrorHandler";
-// import catchAsyncError from "../middleware/catchAsyncErrors";
-// import BusinessUser from "../Models/BusinessUser";
-// import { sendMail } from "../utils/sendMail";
+import BusinessUser from "../Models/BusinessUser";
 
-// export const sendOTP = catchAsyncError(async (req, res, next) => {
-//   const { email } = req.body;
+import ErrorHandler from "../utils/ErrorHandler";
+import { generateVerificationData } from "../utils/generateVerificationData";
+import { sendMail } from "../utils/sendMail";
 
-//   let user = await BusinessUser.findOne({ email });
+export const BusinessUserRegister = catchAsyncErrors(async (req, res, next) => {
+  const { name, email } = req.body;
+  const { verification_code, verification_code_expiry } =
+    generateVerificationData();
+  const result = await sendMail(email, verification_code);
+  if (result) {
+    const businessUser = await BusinessUser.create({
+      name,
+      email,
+      verification_code,
+      verification_code_expiry,
+    });
+    res.status(201).json({
+      success: true,
+      userId: businessUser._id,
+      message: "Verification code sent to your email",
+    });
+  } else {
+    return next(new ErrorHandler("Something went wrong", 500));
+  }
+});
 
-//   if (user) {
-//     return next(new ErrorHandler("User already exist", 401));
-//   }
-
-//   const otp = Math.floor(Math.random() * 1000000);
-
-//   user = await BusinessUser.create({
-//     email,
-//     otp,
-//     otp_expiry: new Date(Date.now() + process.env.OTP_EXPIRE * 60 * 1000),
-//   });
-
-//   await sendMail(email, "Verify your account", `Your OTP is ${otp}`);
-
-//   return res.status(400).json({ success: true, message: "Otp send" });
-// });
-
-// export const verifyOTP = catchAsyncError(async (req, res, next) => {
-//   const { email, otp } = req.body;
-
-//   const user = await BusinessUser.findOne({ email });
-
-//   if (!user) {
-//     return next(new ErrorHandler("User already exist", 401));
-//   }
-
-//   if (user.otp !== otp || user.otp_expiry < new Date()) {
-//     return next(new ErrorHandler("OTP Not verified", 401));
-//   }
-
-//   // If OTP is valid and not expired, you can send the user ID in the response
-//   return res.status(200).json({
-//     success: true,
-//     userId: user._id,
-//     message: "OTP verified successfully",
-//   });
-// });
+export const BusinessUserVerify = catchAsyncErrors(async (req, res, next) => {
+  const { userId, verification_code } = req.body;
+  const businessUser = await BusinessUser.findById(userId);
+  if (businessUser) {
+    if (businessUser.verification_code_expiry > new Date()) {
+      if (businessUser.verification_code === verification_code) {
+        businessUser.isVerified = true;
+        await businessUser.save();
+        res.status(200).json({
+          success: true,
+          message: "User verified successfully",
+          businessUser,
+        });
+      } else {
+        return next(new ErrorHandler("Invalid verification code", 400));
+      }
+    } else {
+      return next(new ErrorHandler("Verification code expired", 400));
+    }
+  } else {
+    return next(new ErrorHandler("User not found", 404));
+  }
+});

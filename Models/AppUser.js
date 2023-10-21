@@ -13,20 +13,21 @@ const userSchema = new mongoose.Schema(
     },
 
     image: {
-      filename: {
-        type: String,
-      },
-      path: {
-        type: String,
-      },
+      type: String,
     },
-    otp: Number,
-    otp_expiry: Date,
+    verification_code: {
+      type: String,
+    },
+    verification_code_expiry: {
+      type: Date,
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
-
-userSchema.index({ otp_expiry: 1 }, { expireAfterSeconds: 300 });
 
 const AppUser = mongoose.model("appuser", userSchema);
 export default AppUser;

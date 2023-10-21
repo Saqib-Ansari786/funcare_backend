@@ -1,19 +1,31 @@
 import { createTransport } from "nodemailer";
 
-export const sendMail = async (email, subject, text) => {
-  const transport = createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  });
+const transporter = createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
+  },
+});
 
-  await transport.sendMail({
-    from: process.env.SMTP_USER,
+export const sendMail = async (email, verification_code) => {
+  const mailOptions = {
+    from: process.env.EMAIL,
     to: email,
-    subject,
-    text,
-  });
+    subject: "Playland App User Verification Code",
+    text: "Verification Code",
+    html: `<h1>Verification Code</h1><p>${verification_code}</p>
+    <p>Verification Code will expire in 1.5 minutes</p>
+    <p>Thank you for using our application</p>
+    <p>Regards,</p>
+    <p>Team Playland</p>
+    `,
+  };
+
+  try {
+    const result = await transporter.sendMail(mailOptions);
+    return result;
+  } catch (error) {
+    return error;
+  }
 };
