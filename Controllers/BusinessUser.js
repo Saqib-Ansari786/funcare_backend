@@ -1,8 +1,8 @@
-import BusinessUser from "../Models/BusinessUser";
-
-import ErrorHandler from "../utils/ErrorHandler";
-import { generateVerificationData } from "../utils/generateVerificationData";
-import { sendMail } from "../utils/sendMail";
+import BusinessUser from "../Models/BusinessUser.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
+import ErrorHandler from "../utils/ErrorHandler.js";
+import { generateVerificationData } from "../utils/generateVerificationData.js";
+import { sendMail } from "../utils/sendMail.js";
 
 export const BusinessUserRegister = catchAsyncErrors(async (req, res, next) => {
   const { name, email } = req.body;

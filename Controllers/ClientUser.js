@@ -1,7 +1,8 @@
-import AppUser from "../Models/AppUser";
-import ErrorHandler from "../utils/ErrorHandler";
-import { generateVerificationData } from "../utils/generateVerificationData";
-import { sendMail } from "../utils/sendMail";
+import AppUser from "../Models/AppUser.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
+import ErrorHandler from "../utils/ErrorHandler.js";
+import { generateVerificationData } from "../utils/generateVerificationData.js";
+import { sendMail } from "../utils/sendMail.js";
 
 export const ClientUserRegister = catchAsyncErrors(async (req, res, next) => {
   const { name, email } = req.body;

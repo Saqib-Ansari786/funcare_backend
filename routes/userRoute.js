@@ -28,6 +28,10 @@ import {
 } from "../Controllers/BusinessBookingUserController.js";
 import upload from "../middleware/uploadImage.js";
 import { imageUpload } from "../Controllers/ImageController.js";
+import {
+  ClientUserRegister,
+  ClientUserVerify,
+} from "../Controllers/ClientUser.js";
 
 const userRouter = express.Router();
 
@@ -36,6 +40,11 @@ userRouter.route("/appuser").post(AppUserSet);
 userRouter.route("/user/record/:id").get(AppUserData);
 
 userRouter.route("/user/update/:id").post(AppUserUpdate);
+
+//Client User end point
+
+userRouter.route("/clientuser/sendEmail").post(ClientUserRegister);
+userRouter.route("/clientuser/verifyEmail").post(ClientUserVerify);
 
 // userRouter.route("/playlanduser").post(upload.single("image"),PlaylandUserCreate);
 
