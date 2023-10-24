@@ -31,6 +31,7 @@ import { imageUpload } from "../Controllers/ImageController.js";
 import {
   ClientUserRegister,
   ClientUserVerify,
+  deleteAllClientUser,
 } from "../Controllers/ClientUser.js";
 
 const userRouter = express.Router();
@@ -45,6 +46,7 @@ userRouter.route("/user/update/:id").post(AppUserUpdate);
 
 userRouter.route("/clientuser/sendEmail").post(ClientUserRegister);
 userRouter.route("/clientuser/verifyEmail").post(ClientUserVerify);
+userRouter.route("/clientuser/deleteAll").delete(deleteAllClientUser);
 
 // userRouter.route("/playlanduser").post(upload.single("image"),PlaylandUserCreate);
 

@@ -1,3 +1,4 @@
+import { createTransport } from "nodemailer";
 import AppUser from "../Models/AppUser.js";
 import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 import ErrorHandler from "../utils/ErrorHandler.js";
@@ -8,7 +9,9 @@ export const ClientUserRegister = catchAsyncErrors(async (req, res, next) => {
   const { name, email } = req.body;
   const { verification_code, verification_code_expiry } =
     generateVerificationData();
+
   const result = await sendMail(email, verification_code);
+
   if (result) {
     const clientUser = await AppUser.create({
       name,
@@ -48,4 +51,12 @@ export const ClientUserVerify = catchAsyncErrors(async (req, res, next) => {
   } else {
     return next(new ErrorHandler("User not found", 404));
   }
+});
+
+export const deleteAllClientUser = catchAsyncErrors(async (req, res, next) => {
+  await AppUser.deleteMany();
+  res.status(200).json({
+    success: true,
+    message: "All client users deleted successfully",
+  });
 });
