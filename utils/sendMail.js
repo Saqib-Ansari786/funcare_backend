@@ -14,18 +14,8 @@ export const sendMail = async (email, verification_code) => {
     to: email,
     subject: "Playland App User Verification Code",
     text: "Verification Code",
-    html: `<h1>Verification Code</h1><p>${verification_code}</p>
-    <p>Verification Code will expire in 1.5 minutes</p>
-    <p>Thank you for using our application</p>
-    <p>Regards,</p>
-    <p>Team Playland</p>
-    `,
   };
+  await transporter.sendMail(mailOptions);
 
-  try {
-    const result = await transporter.sendMail(mailOptions);
-    return result;
-  } catch (error) {
-    return error;
-  }
+  console.log("mail sent");
 };

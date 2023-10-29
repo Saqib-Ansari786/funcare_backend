@@ -3,7 +3,7 @@ export const generateVerificationData = () => {
 
   const verification_code_expiry = new Date();
   verification_code_expiry.setMinutes(
-    verification_code_expiry.getMinutes() + 1.5
+    verification_code_expiry.getMinutes() + 4
   );
 
   return { verification_code, verification_code_expiry };
