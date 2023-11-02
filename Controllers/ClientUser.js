@@ -93,3 +93,15 @@ export const deleteAllClientUser = catchAsyncErrors(async (req, res, next) => {
     message: "All client users deleted successfully",
   });
 });
+
+export const getUser = catchAsyncErrors(async (req, res, next) => {
+  const user = await AppUser.findById(req.params.id);
+  if (user) {
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  } else {
+    return next(new ErrorHandler("User not found", 404));
+  }
+});
