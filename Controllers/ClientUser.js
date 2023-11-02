@@ -13,7 +13,7 @@ const transporter = createTransport({
 });
 
 export const ClientUserRegister = catchAsyncErrors(async (req, res, next) => {
-  const { name, email } = req.body;
+  const { email } = req.body;
   const { verification_code, verification_code_expiry } =
     generateVerificationData();
 
@@ -40,7 +40,6 @@ export const ClientUserRegister = catchAsyncErrors(async (req, res, next) => {
     );
     if (!isClientUser) {
       const clientUser = await AppUser.create({
-        name,
         email,
         verification_code,
         verification_code_expiry,
