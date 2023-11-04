@@ -33,6 +33,7 @@ import {
   ClientUserVerify,
   deleteAllClientUser,
   getUser,
+  updateClientUser,
 } from "../Controllers/ClientUser.js";
 
 const userRouter = express.Router();
@@ -49,6 +50,7 @@ userRouter.route("/clientuser/sendEmail").post(ClientUserRegister);
 userRouter.route("/clientuser/verifyEmail").post(ClientUserVerify);
 userRouter.route("/clientuser/deleteAll").delete(deleteAllClientUser);
 userRouter.route("/clientuser/:id").get(getUser);
+userRouter.route("/clientuser/update/:id").post(updateClientUser);
 
 // userRouter.route("/playlanduser").post(upload.single("image"),PlaylandUserCreate);
 

@@ -105,3 +105,19 @@ export const getUser = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("User not found", 404));
   }
 });
+
+export const updateClientUser = catchAsyncErrors(async (req, res, next) => {
+  const clientUser = await AppUser.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+  if (clientUser) {
+    res.status(200).json({
+      success: true,
+      clientUser,
+    });
+  } else {
+    return next(new ErrorHandler("User not found", 404));
+  }
+});
