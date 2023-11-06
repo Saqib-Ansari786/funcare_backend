@@ -35,6 +35,13 @@ import {
   getUser,
   updateClientUser,
 } from "../Controllers/ClientUser.js";
+import {
+  BusinessUserRegister,
+  BusinessUserVerify,
+  deleteAllBusinessUser,
+  getBusinessUser,
+  updateBusinessUser,
+} from "../Controllers/BusinessUser.js";
 
 const userRouter = express.Router();
 
@@ -52,9 +59,12 @@ userRouter.route("/clientuser/deleteAll").delete(deleteAllClientUser);
 userRouter.route("/clientuser/:id").get(getUser);
 userRouter.route("/clientuser/update/:id").post(updateClientUser);
 
-// userRouter.route("/playlanduser").post(upload.single("image"),PlaylandUserCreate);
-
-userRouter.route("/upload/image").post(upload.single("image"), imageUpload);
+// Business User end point
+userRouter.route("/businessuser/sendEmail").post(BusinessUserRegister);
+userRouter.route("/businessuser/verifyEmail").post(BusinessUserVerify);
+userRouter.route("/businessuser/deleteAll").delete(deleteAllBusinessUser);
+userRouter.route("/businessuser/:id").get(getBusinessUser);
+userRouter.route("/businessuser/update/:id").post(updateBusinessUser);
 
 userRouter.route("/create/playlanduser").post(CreatePlaylandUser);
 
