@@ -66,3 +66,19 @@ export const DeleteAllPlayland = catchAsyncErrors(async (req, res, next) => {
     console.error(err);
   }
 });
+
+export const getSinglePlayland = catchAsyncErrors(async (req, res, next) => {
+  try {
+    const playland = await PlaylandUser.find({ user_id: req.params.id });
+    if (playland) {
+      res.status(200).json({
+        success: true,
+        playland,
+      });
+    } else {
+      return next(new ErrorHandler("playland not found", 404));
+    }
+  } catch (err) {
+    console.error(err);
+  }
+});

@@ -11,6 +11,7 @@ import {
   PlaylandUserUpdate,
   PlaylandUserDelete,
   DeleteAllPlayland,
+  getSinglePlayland,
 } from "../Controllers/PlaylandUserController.js";
 import {
   BusinessUserSet,
@@ -66,14 +67,14 @@ userRouter.route("/businessuser/deleteAll").delete(deleteAllBusinessUser);
 userRouter.route("/businessuser/:id").get(getBusinessUser);
 userRouter.route("/businessuser/update/:id").post(updateBusinessUser);
 
+// play land end points
+
 userRouter.route("/create/playlanduser").post(CreatePlaylandUser);
-
 userRouter.route("/playlandrecord").get(PlaylandAllData);
-
 userRouter.route("/playlanduser/update/:id").post(PlaylandUserUpdate);
-
 userRouter.route("/playlanduser/delete/:id").post(PlaylandUserDelete);
 userRouter.route("/delete/allplaylands").delete(DeleteAllPlayland);
+userRouter.route("/playland/:id").get(getSinglePlayland);
 
 // business user end point
 
