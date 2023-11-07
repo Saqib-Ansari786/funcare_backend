@@ -72,7 +72,7 @@ userRouter.route("/businessuser/update/:id").post(updateBusinessUser);
 userRouter.route("/create/playlanduser").post(CreatePlaylandUser);
 userRouter.route("/playlandrecord").get(PlaylandAllData);
 userRouter.route("/playlanduser/update/:id").post(PlaylandUserUpdate);
-userRouter.route("/playlanduser/delete/:id").post(PlaylandUserDelete);
+userRouter.route("/playlanduser/delete/:id").delete(PlaylandUserDelete);
 userRouter.route("/delete/allplaylands").delete(DeleteAllPlayland);
 userRouter.route("/playland/:id").get(getSinglePlayland);
 
