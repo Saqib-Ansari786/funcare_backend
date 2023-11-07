@@ -3,6 +3,9 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
+    user_id: {
+      type: String,
+    },
     playland_name: {
       type: String,
     },
