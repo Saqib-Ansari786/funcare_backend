@@ -34,17 +34,23 @@ export const PlaylandAllData = catchAsyncErrors(async (req, res, next) => {
 ///////////// update playland user data ////////////////////
 
 export const PlaylandUserUpdate = async (req, res, next) => {
-  const playlandUser = await PlaylandUser.findById(req.params.id);
-  // console.log(playlandUser);
-  if (!playlandUser) {
-    return next(new ErrorHandler("playland not found", 404));
+  try {
+    const updatedplayland = await PlaylandUser.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+      }
+    );
+    if (!updatedplayland) {
+      return next(new ErrorHandler("Product not found", 404));
+    }
+    res.status(201).json({ message: "success", updatedplayland });
+  } catch (err) {
+    console.error(err);
   }
-  const UpdateplaylandUser = await PlaylandUser.findByIdAndUpdate(
-    req.params.id,
-    req.body
-  );
-
-  res.status(201).json({ message: "success", UpdateplaylandUser });
 };
 
 ///////////// delete playland user ////////////////////
