@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema(
     location: {
       type: String,
     },
+    status: {
+      type: Boolean,
+      default: false,
+    },
     timing1: {
       timing: {
         type: String,
